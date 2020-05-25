@@ -84,7 +84,7 @@ ul, ol {
   width: 100%;
   margin: 0 auto;
   padding: 0 50px;
-  background-color: $bg-white;
+  background-color: $bg-light;
 }
 .main {
   background-color: $bg-main;
@@ -95,7 +95,7 @@ ul, ol {
     font-weight: bold;
   }
 }
-.title
+
 /******* atomic classes *******/
 ._bold {
   font-weight: bold;

@@ -1,0 +1,66 @@
+.workArea {
+  background-color: $bg-main;
+  margin: 10% auto;
+  width: 80%;
+  &__info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+  }
+  &__infoItem {
+    width: 50%;
+  }
+  &__tools {
+    margin-top: 10px;
+  }
+}
+.generationArea {
+  height: 400px;
+  background-color: $bg-light;
+}
+.tools {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.changeNumber {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__item {
+    font-size: $font-size-big;
+    font-weight: bold;
+  }
+}
+.decrease {
+  width: $font-size-base;
+  height: 4px;
+  background-color: $info;
+}
+.increase {
+  position: relative;
+  width: $font-size-base;
+  height: 4px;
+  background-color: $info;
+  z-index: 1;
+  &:after {
+    display: block;
+    position: absolute;
+    top: calc(50% - 2px);
+    left: 0;
+    transform: rotate(90deg);
+    content: '';
+    width: $font-size-base;
+    height: 4px;
+    z-index: 2;
+    background-color: $info;
+  }
+}
+.infoBlock {
+  border: 1px solid $base;
+  color: $base;
+  font-size: $font-size-base;
+  font-weight: 400;
+  line-height: normal;
+}

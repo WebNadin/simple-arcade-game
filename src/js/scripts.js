@@ -1,7 +1,7 @@
 //= partials/helper.js
 //= partials/pixi.min.js
 
-
+const stage = new PIXI.Container();
 const app = new PIXI.Application();
 document.body.appendChild(app.view);
 
