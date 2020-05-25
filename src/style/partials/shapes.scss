@@ -1,47 +1,78 @@
 .workArea {
-  background-color: $bg-main;
   margin: 10% auto;
-  width: 80%;
+  width: $sizeStep*61;
   &__info {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    width: 60%;
+    .infoBlock {
+      border-bottom: transparent;
+    }
   }
   &__infoItem {
-    width: 50%;
+    box-sizing: border-box;
+    padding: $sizeStep/2 $sizeStep*2;
+    min-height: $sizeStep*3;
+    min-width: $sizeStep*18;
+  }
+  &__generationArea {
   }
   &__tools {
-    margin-top: 10px;
+    margin-top: $sizeStep;
   }
 }
 .generationArea {
-  height: 400px;
+  height: $sizeStep*39;
   background-color: $bg-light;
+  border: $sizeStep/8 solid $base;
+  width: $sizeStep*61;
 }
 .tools {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  &__item {
+    display: flex;
+    align-items: center;
+    margin-left: $sizeStep*2;
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+  &__info {
+    min-height: $sizeStep*4;
+    margin-left: $sizeStep;
+    min-width: $sizeStep*9;
+  }
 }
 .changeNumber {
   display: flex;
   justify-content: center;
   align-items: center;
+  border: $sizeStep/4 solid $base;
+  border-radius: 14px;
   &__item {
-    font-size: $font-size-big;
+    box-sizing: border-box;
     font-weight: bold;
+    height: $sizeStep*4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: $sizeStep/2 $sizeStep/4*7;
+    &:first-child {
+      border-right: $sizeStep/4 solid $base;
+    }
   }
 }
 .decrease {
   width: $font-size-base;
-  height: 4px;
+  height: $sizeStep/2;
   background-color: $info;
 }
 .increase {
   position: relative;
   width: $font-size-base;
-  height: 4px;
+  height: $sizeStep/2;
   background-color: $info;
   z-index: 1;
   &:after {
@@ -52,13 +83,17 @@
     transform: rotate(90deg);
     content: '';
     width: $font-size-base;
-    height: 4px;
+    height: $sizeStep/2;
     z-index: 2;
     background-color: $info;
   }
 }
 .infoBlock {
-  border: 1px solid $base;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  border: $sizeStep/8 solid $base;
   color: $base;
   font-size: $font-size-base;
   font-weight: 400;
