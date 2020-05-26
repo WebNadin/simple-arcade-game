@@ -5,7 +5,6 @@ class Shape {
     this.type = type;
     this.radius = 50;
     this.app = app;
-
     this.inAreaX = generationAreaWidth - 100;
     this.circleY = -50;
     this.circleX = 50 + random(this.inAreaX);
@@ -24,14 +23,31 @@ class Shape {
     //circle.num = figuresAmount;
     figures.push(this.circle);
     this.app.stage.addChild(this.circle);
-    //TweenLite.to(this.circle, 0.5, {y:"+=20px"});
+  }
+
+  startFallingAnimation() {
+    let ticker = PIXI.Ticker.shared;
+    ticker.autoStart = false;
+    ticker.speed = .5;
+
+    function animate(time) {
+      figures.forEach((item) => {
+        item.position.y += gravity * ticker.deltaTime;
+      });
+      ticker.update(time);
+      requestAnimationFrame(animate);
+    }
+
+    animate(performance.now());
   }
 
   render() {
     switch (this.type) {
       case 'circle':
         this.createCircle();
+
         break;
     }
+    this.startFallingAnimation();
   }
 }
