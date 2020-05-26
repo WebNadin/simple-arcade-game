@@ -1,6 +1,10 @@
-//= partials/helper.js
 //= partials/pixi.min.js
+//= partials/helper.js
+//= partials/shapes.js
+//= partials/TweenLite.min.js
 
+let figures = [];
+let animationStep = 1;
 class generationArea {
 
   constructor() {
@@ -10,25 +14,62 @@ class generationArea {
     this.gravity = 4;
     this.shapesAmount = -1;
     this.activeShapesAmount = 0;
-    this.shapes = [];
+    //this.shapes = ['circle', 'ellipse', 'triangle', 'rectangle', 'pentagon', 'hexagon'];
+    this.shapes = ['circle', 'circle', 'circle'];
     this.colors = [0xFFFF0B, 0xFF700B, 0x4286f4, 0x4286f4, 0xf441e8, 0x8dff6d, 0x41ccc9, 0xe03375, 0x95e032, 0x77c687, 0x43ba5b, 0x0ea3ba];
     this.app = new PIXI.Application({
       width: this.width, height: this.height, backgroundColor: 0xffffff, resolution: window.devicePixelRatio || 1
     });
-
-    this.name = name;
   }
 
-  createCanvas() {
-    //app = new PIXI.Application({
-    //  width: width, height: height, backgroundColor: 0xffffff, resolution: window.devicePixelRatio || 1
-    //});
+  init() {
+    this.createStage();
+    setInterval(() => {
+      this.createRandomShape();
+    }, 1000);
+    this.startFallingAnimation();
+    //setInterval(() => {
+    //  this.startFallingAnimation();
+    //}, this.duration);
+  }
+
+  createStage() {
     this.item.appendChild(this.app.view);
+  }
+
+  createRandomShape() {
+    this.randomColor = randomElem(this.colors);
+    this.randomShape = randomElem(this.shapes);
+    this.shape = new Shape(this.randomColor, this.randomShape, this.width, this.app);
+    this.shape.render();
+
+  }
+
+  startFallingAnimation() {
+
+    figures.forEach((item) => {
+      if (item.position.y > this.height + 100) {
+        item.position.y += animationStep;
+      }
+    });
+
+    //figures.forEach((item, i) => {
+    //  TweenLite.to(item, this.gravity, {y: this.height + 100, ease: Linear.easeNone});
+    //});
+
+    //this.app.ticker.add(function () {
+    //  figures.forEach((item) => {
+    //    console.log('item = ',item);
+    //    item.position.y += this.gravity;
+    //  });
+    //});
   }
 }
 
-let stage = new generationArea("Иван");
-stage.createCanvas();
+document.addEventListener("DOMContentLoaded", function (event) {
+  let stage = new generationArea();
+  stage.init();
+});
 
 
 //let width = document.getElementById('generationArea').clientWidth;
@@ -97,9 +138,7 @@ stage.createCanvas();
 //view.loadGame();
 
 
-document.addEventListener("DOMContentLoaded", function (event) {
-  console.log('Hello');
-});
+
 
 
 
