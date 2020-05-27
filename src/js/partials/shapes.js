@@ -12,7 +12,9 @@ class Shape {
     this.triangleX = random(generationAreaWidth - this.radius * 2);
     this.triangleY = this.radius * 2;
     this.rectangleX = random(generationAreaWidth - this.radius * 2);
-    this.rectangleY = -this.radius;
+    this.rectangleY = -this.radius*2;
+    this.pentagonX = random(generationAreaWidth - this.radius * 2);
+    this.pentagonY = -this.radius * 2;
     this.randomX = random(generationAreaWidth - this.radius * 2);
     this.borderColor = 0x000000;
   }
@@ -34,7 +36,7 @@ class Shape {
     this.ellipse = new PIXI.Graphics();
     this.ellipse.lineStyle(2, this.borderColor, 1);
     this.ellipse.beginFill(this.color, 1);
-    this.ellipse.drawEllipse(this.ellipseX, this.ellipseY, this.radius * 2, this.radius);
+    this.ellipse.drawEllipse(this.ellipseX, this.ellipseY, this.radius * 1.5, this.radius);
     this.ellipse.endFill();
     this.ellipse.interactive = true;
     this.ellipse.buttonMode = true;
@@ -74,6 +76,28 @@ class Shape {
 
     figures.push(this.rectangle);
     this.app.stage.addChild(this.rectangle);
+  }
+
+  createPentagon() {
+    this.pentagon = new PIXI.Graphics();
+    this.pentagon.lineStyle(2, this.borderColor, 1);
+    this.pentagon.beginFill(this.color);
+    this.pentagon.drawPolygon([
+      this.pentagonX, this.pentagonY + 32,
+      this.pentagonX + 40, this.pentagonY,
+      this.pentagonX + 80, this.pentagonY + 32,
+      this.pentagonX + 60, this.pentagonY + 70,
+      this.pentagonX + 20, this.pentagonY + 70,
+      this.pentagonX, this.pentagonY + 32
+    ]);
+
+    this.pentagon.endFill();
+    this.pentagon.interactive = true;
+    this.pentagon.buttonMode = true;
+    this.pentagon.live = true;
+
+    figures.push(this.pentagon);
+    this.app.stage.addChild(this.pentagon);
   }
 
   createRandom() {
@@ -123,6 +147,9 @@ class Shape {
         break;
       case 'rectangle':
         this.createRectangle();
+        break;
+      case 'pentagon':
+        this.createPentagon();
         break;
       case 'random':
         this.createRandom();
