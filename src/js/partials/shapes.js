@@ -10,7 +10,8 @@ class Shape {
     this.ellipseX = this.radius * 2 + random(generationAreaWidth - this.radius * 4);
     this.ellipseY = -this.radius;
     this.triangleX = random(generationAreaWidth - this.radius * 2);
-    this.triangleY = this.radius*2;
+    this.triangleY = this.radius * 2;
+    this.randomX = random(generationAreaWidth - this.radius * 2);
     this.borderColor = 0x000000;
   }
 
@@ -43,17 +44,32 @@ class Shape {
 
   createTriangle() {
     this.triangle = new PIXI.Graphics();
-    this.triangle.lineStyle(2, 0xffd900, 1);
-    this.triangle.beginFill(0xFF3300);
+    this.triangle.lineStyle(2, this.borderColor, 1);
+    this.triangle.beginFill(this.color);
     this.triangle.moveTo(this.triangleX, 0);
     this.triangle.lineTo(this.triangleX + this.radius, -this.triangleY);
-    this.triangle.lineTo(this.triangleX + this.radius*2, 0);
+    this.triangle.lineTo(this.triangleX + this.radius * 2, 0);
     this.triangle.lineTo(this.triangleX, 0);
     this.triangle.closePath();
     this.triangle.endFill();
 
     figures.push(this.triangle);
     this.app.stage.addChild(this.triangle);
+  }
+
+  createRandom() {
+    console.log('test');
+    this.random = new PIXI.Graphics();
+    this.random.lineStyle(2, this.borderColor, 1);
+    this.random.beginFill(this.color);
+    this.random.moveTo(this.randomX + this.radius/2, this.radius); //TODO
+    this.random.quadraticCurveTo(this.randomX - this.radius/2, this.radius/2, this.randomX + this.radius/2, -this.radius/2);
+    //this.random.lineTo(this.randomX, -this.radius);
+    this.random.closePath();
+    this.random.endFill();
+
+    figures.push(this.random);
+    this.app.stage.addChild(this.random);
   }
 
   startFallingAnimation() {
@@ -82,6 +98,9 @@ class Shape {
         break;
       case 'triangle':
         this.createTriangle();
+        break;
+      case 'random':
+        this.createRandom();
         break;
     }
     this.startFallingAnimation();
