@@ -11,6 +11,8 @@ class Shape {
     this.ellipseY = -this.radius;
     this.triangleX = random(generationAreaWidth - this.radius * 2);
     this.triangleY = this.radius * 2;
+    this.rectangleX = random(generationAreaWidth - this.radius * 2);
+    this.rectangleY = -this.radius;
     this.randomX = random(generationAreaWidth - this.radius * 2);
     this.borderColor = 0x000000;
   }
@@ -52,19 +54,39 @@ class Shape {
     this.triangle.lineTo(this.triangleX, 0);
     this.triangle.closePath();
     this.triangle.endFill();
+    this.triangle.interactive = true;
+    this.triangle.buttonMode = true;
+    this.triangle.live = true;
 
     figures.push(this.triangle);
     this.app.stage.addChild(this.triangle);
   }
 
+  createRectangle() {
+    this.rectangle = new PIXI.Graphics();
+    this.rectangle.lineStyle(2, this.borderColor, 1);
+    this.rectangle.beginFill(this.color);
+    this.rectangle.drawRect(this.rectangleX, this.rectangleY, this.radius * 2, this.radius * 1.5);
+    this.rectangle.endFill();
+    this.rectangle.interactive = true;
+    this.rectangle.buttonMode = true;
+    this.rectangle.live = true;
+
+    figures.push(this.rectangle);
+    this.app.stage.addChild(this.rectangle);
+  }
+
   createRandom() {
     console.log('test');
+    let step = this.radius / 2;
     this.random = new PIXI.Graphics();
     this.random.lineStyle(2, this.borderColor, 1);
     this.random.beginFill(this.color);
-    this.random.moveTo(this.randomX + this.radius/2, this.radius); //TODO
-    this.random.quadraticCurveTo(this.randomX - this.radius/2, this.radius/2, this.randomX + this.radius/2, -this.radius/2);
-    //this.random.lineTo(this.randomX, -this.radius);
+    this.random.moveTo(this.randomX + step, -step * 4);
+    this.random.quadraticCurveTo(this.randomX, -step * 4 - step, this.randomX + step, -step * 4 - step * 1.5);
+    //this.random.moveTo(this.randomX + step, -step * 4 - step * 1.5);
+    this.random.quadraticCurveTo(this.randomX + step * 2, -step * 4 - step * 3, step * 3, -step * 4 - step * 2.5);
+    //this.random.lineTo(this.randomX, -step);
     this.random.closePath();
     this.random.endFill();
 
@@ -98,6 +120,9 @@ class Shape {
         break;
       case 'triangle':
         this.createTriangle();
+        break;
+      case 'rectangle':
+        this.createRectangle();
         break;
       case 'random':
         this.createRandom();
