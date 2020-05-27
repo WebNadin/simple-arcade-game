@@ -12,23 +12,28 @@ class Shape {
     this.triangleX = random(generationAreaWidth - this.radius * 2);
     this.triangleY = this.radius * 2;
     this.rectangleX = random(generationAreaWidth - this.radius * 2);
-    this.rectangleY = -this.radius*2;
+    this.rectangleY = -this.radius * 2;
     this.pentagonX = random(generationAreaWidth - this.radius * 2);
     this.pentagonY = -this.radius * 2;
-    this.randomX = random(generationAreaWidth - this.radius * 2);
+    this.hexagonX = this.radius + random(generationAreaWidth - this.radius * 2);
+    this.hexagonY = -this.radius * 3;
+    this.randomX = 20 + random(generationAreaWidth - 110 - 40);
+    this.randomY = -this.radius * 2;
     this.borderColor = 0x000000;
   }
 
   createCircle() {
     this.circle = new PIXI.Graphics();
-    this.circle.lineStyle(2, this.borderColor, 1);
     this.circle.beginFill(this.color, 1);
     this.circle.drawCircle(this.circleX, this.circleY, this.radius);
     this.circle.endFill();
     this.circle.interactive = true;
     this.circle.buttonMode = true;
     this.circle.live = true;
+    this.circle.surfaceArea = Math.round(Math.PI * this.radius * this.radius);
+    console.log("this.circle.surfaceArea =", this.circle.surfaceArea);
     figures.push(this.circle);
+    figuresSurfaceArea += this.circle;
     this.app.stage.addChild(this.circle);
   }
 
@@ -41,14 +46,14 @@ class Shape {
     this.ellipse.interactive = true;
     this.ellipse.buttonMode = true;
     this.ellipse.live = true;
-
+    this.ellipse.surfaceArea = Math.round(Math.PI * this.radius / 2 * this.radius * 1.5 / 2);
+    console.log("this.ellipse.surfaceArea =", this.ellipse.surfaceArea);
     figures.push(this.ellipse);
     this.app.stage.addChild(this.ellipse);
   }
 
   createTriangle() {
     this.triangle = new PIXI.Graphics();
-    this.triangle.lineStyle(2, this.borderColor, 1);
     this.triangle.beginFill(this.color);
     this.triangle.moveTo(this.triangleX, 0);
     this.triangle.lineTo(this.triangleX + this.radius, -this.triangleY);
@@ -59,7 +64,8 @@ class Shape {
     this.triangle.interactive = true;
     this.triangle.buttonMode = true;
     this.triangle.live = true;
-
+    this.triangle.surfaceArea = Math.round(Math.sqrt(3) / 4 * this.radius * this.radius);
+    console.log("this.triangle.surfaceArea =", this.triangle.surfaceArea);
     figures.push(this.triangle);
     this.app.stage.addChild(this.triangle);
   }
@@ -100,18 +106,44 @@ class Shape {
     this.app.stage.addChild(this.pentagon);
   }
 
+  createHexagon() {
+    this.hexagon = new PIXI.Graphics();
+    this.hexagon.lineStyle(2, this.borderColor, 1);
+    this.hexagon.beginFill(this.color);
+    this.hexagon.drawPolygon([
+      this.hexagonX - this.radius, this.hexagonY,
+      this.hexagonX - this.radius / 2, this.hexagonY + this.radius * 0.87,
+      this.hexagonX + this.radius / 2, this.hexagonY + this.radius * 0.87,
+      this.hexagonX + this.radius, this.hexagonY,
+      this.hexagonX + this.radius / 2, this.hexagonY - this.radius * 0.87,
+      this.hexagonX - this.radius / 2, this.hexagonY - this.radius * 0.87
+    ]);
+
+    this.hexagon.endFill();
+    //this.hexagon.angle =10;
+    this.hexagon.interactive = true;
+    this.hexagon.buttonMode = true;
+    this.hexagon.live = true;
+
+    figures.push(this.hexagon);
+    this.app.stage.addChild(this.hexagon);
+  }
+
   createRandom() {
-    console.log('test');
-    let step = this.radius / 2;
     this.random = new PIXI.Graphics();
-    this.random.lineStyle(2, this.borderColor, 1);
     this.random.beginFill(this.color);
-    this.random.moveTo(this.randomX + step, -step * 4);
-    this.random.quadraticCurveTo(this.randomX, -step * 4 - step, this.randomX + step, -step * 4 - step * 1.5);
-    //this.random.moveTo(this.randomX + step, -step * 4 - step * 1.5);
-    this.random.quadraticCurveTo(this.randomX + step * 2, -step * 4 - step * 3, step * 3, -step * 4 - step * 2.5);
-    //this.random.lineTo(this.randomX, -step);
-    this.random.closePath();
+
+    this.random.drawEllipse(this.randomX + 20, this.randomY + 35, 40, 20);
+    this.random.drawEllipse(this.randomX + 20 + 70, this.randomY + 35, 40, 20);
+
+    this.random.drawEllipse(this.randomX + 55, this.randomY + 10, 40, 20);
+    this.random.drawEllipse(this.randomX + 55, this.randomY + 10 + 50, 40, 20);
+
+    this.random.drawEllipse(this.randomX + 15, this.randomY + 20, 20, 15);
+    this.random.drawEllipse(this.randomX + 15 + 80, this.randomY + 20, 20, 15);
+    this.random.drawEllipse(this.randomX + 15 + 80, this.randomY + 20 + 30, 20, 15);
+    this.random.drawEllipse(this.randomX + 15, this.randomY + 20 + 30, 20, 15);
+
     this.random.endFill();
 
     figures.push(this.random);
@@ -150,6 +182,9 @@ class Shape {
         break;
       case 'pentagon':
         this.createPentagon();
+        break;
+      case 'hexagon':
+        this.createHexagon();
         break;
       case 'random':
         this.createRandom();
