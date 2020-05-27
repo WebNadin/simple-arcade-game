@@ -31,7 +31,6 @@ class Shape {
     this.circle.buttonMode = true;
     this.circle.live = true;
     this.circle.surfaceArea = Math.round(Math.PI * this.radius * this.radius);
-    console.log("this.circle.surfaceArea =", this.circle.surfaceArea);
     figures.push(this.circle);
     figuresSurfaceArea += this.circle;
     this.app.stage.addChild(this.circle);
@@ -47,7 +46,6 @@ class Shape {
     this.ellipse.buttonMode = true;
     this.ellipse.live = true;
     this.ellipse.surfaceArea = Math.round(Math.PI * this.radius / 2 * this.radius * 1.5 / 2);
-    console.log("this.ellipse.surfaceArea =", this.ellipse.surfaceArea);
     figures.push(this.ellipse);
     this.app.stage.addChild(this.ellipse);
   }
