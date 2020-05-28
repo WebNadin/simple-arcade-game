@@ -14,24 +14,21 @@ class Tools {
   constructor() {
     this.gravityButtons = [...document.querySelectorAll('.js-gravity')];
     this.gravityStep = 2;
+
     this.increaseButtons = [...document.querySelectorAll('.js-increase')];
-    console.log("this.increaseButtons =", this.increaseButtons);
   }
 
   gravityController(el) {
     this.gravityField = el.target.closest('.tools__item').querySelector('.js-gravityValue');
-    this.gravityPrev = +this.gravityField.textContent;
-
+    this.gravityPrev = this.gravityField.textContent;
     if (el.target.classList.contains('js-increase')) {
-      this.gravityField.textContent = this.gravityPrev + this.gravityStep;
-    } else {
-      this.gravityField.textContent = this.gravityPrev - this.gravityStep;
+      this.gravityField.textContent = +this.gravityPrev + this.gravityStep;
+      gravity = +this.gravityPrev + this.gravityStep;
+    } else if (el.target.classList.contains('js-decrease')){
+      this.gravityField.textContent = +this.gravityPrev - this.gravityStep;
+      gravity = +this.gravityPrev - this.gravityStep;
     }
-    this.gravityPrev = +this.gravityField.textContent;
-    if (!this.gravityPrev) {
-      return false;
-    }
-    console.log('this.gravityPrev < 0 = ', this.gravityPrev < 0);
+    this.gravityPrev = this.gravityField.textContent;
   }
 
   init() {

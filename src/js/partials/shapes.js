@@ -63,7 +63,6 @@ class Shape {
     this.triangle.buttonMode = true;
     this.triangle.live = true;
     this.triangle.surfaceArea = Math.round(Math.sqrt(3) / 4 * this.radius * this.radius);
-    console.log("this.triangle.surfaceArea =", this.triangle.surfaceArea);
     figures.push(this.triangle);
     this.app.stage.addChild(this.triangle);
   }
