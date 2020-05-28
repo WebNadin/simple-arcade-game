@@ -2,7 +2,7 @@
 
  ![Website working gif](https://github.com/WebNadin/simple-arcade-game/blob/master/readme-image.jpg)
 
- Website link: [webnadin.inf.ua/kill-the-shape](http://http://webnadin.inf.ua/kill-the-shape/)]
+ Website link: [webnadin.inf.ua/kill-the-shape](http://http://webnadin.inf.ua/kill-the-shape/)
 
  There is an area with generation field and several tools for changing different indicators.
  After loading page we see figures, that falls down. New figure are randomly generated and creating every 500ms. Every
