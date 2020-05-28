@@ -1,6 +1,6 @@
  # Simple arcade game: hit the figure, cool cowboy.
 
- ![Website working gif](https://github.com/WebNadin/simple-arcade-game/raw/master/readme-image.png)
+ ![Website working gif](https://github.com/WebNadin/simple-arcade-game/raw/master/readme-image.jpg)
 
  Website link: [webnadin.inf.ua/kill-the-shape](http://http://webnadin.inf.ua/kill-the-shape/)
 
