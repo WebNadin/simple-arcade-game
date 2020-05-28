@@ -4,7 +4,7 @@
 
 let figures = [];
 let figuresSurfaceArea = 0;
-let animationStep = 1000;
+let animationStep = 600;
 let gravity = 4;
 let shapesNumber = 4;
 let shapes = ['circle', 'ellipse', 'triangle', 'rectangle', 'pentagon', 'hexagon', 'random'];
