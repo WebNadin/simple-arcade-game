@@ -1,0 +1,122 @@
+.workArea {
+  margin: 10% auto;
+  width: $sizeStep*61;
+  &__info {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    .infoBlock {
+      border-bottom: transparent;
+    }
+  }
+  &__infoItem {
+    box-sizing: border-box;
+    padding: $sizeStep/2 $sizeStep*2;
+    min-height: $sizeStep*3;
+    min-width: $sizeStep*18;
+  }
+  &__generationArea {
+  }
+  &__tools {
+    margin-top: $sizeStep;
+  }
+}
+.generationArea {
+  height: $sizeStep*39;
+  background-color: $bg-light;
+  border: $sizeStep/8 solid $base;
+  width: $sizeStep*61;
+}
+.tools {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  &__item {
+    display: flex;
+    align-items: center;
+    margin-left: $sizeStep*2;
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+  &__info {
+    min-height: $sizeStep*4;
+    margin-left: $sizeStep;
+    min-width: $sizeStep*9;
+  }
+}
+.changeNumber {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: $sizeStep/4 solid $base;
+  border-radius: 14px;
+  &__item {
+    box-sizing: border-box;
+    font-weight: bold;
+    height: $sizeStep*4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: $sizeStep/2 $sizeStep/4*7;
+    &:first-child {
+      border-right: $sizeStep/4 solid $base;
+    }
+  }
+}
+.decrease {
+  width: $font-size-base;
+  height: $sizeStep/2;
+  background-color: $info;
+}
+.increase {
+  position: relative;
+  width: $font-size-base;
+  height: $sizeStep/2;
+  background-color: $info;
+  z-index: 1;
+  &:after {
+    display: block;
+    position: absolute;
+    top: calc(50% - 2px);
+    left: 0;
+    transform: rotate(90deg);
+    content: '';
+    width: $font-size-base;
+    height: $sizeStep/2;
+    z-index: 2;
+    background-color: $info;
+  }
+}
+.infoBlock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  border: $sizeStep/8 solid $base;
+  color: $base;
+  font-size: $font-size-base;
+  font-weight: 400;
+  line-height: normal;
+  position: relative;
+  &_surfaceArea {
+    &:after {
+      position: absolute;
+      color: red;
+      left: 0;
+      bottom: calc(100% + 7px);
+      content: 'current figure area';
+      font-size: 12px;
+    }
+  }
+  &_gravity {
+    &:after {
+      position: absolute;
+      color: red;
+      left: 0;
+      top: calc(100% + 3px);
+      content: 'gravity';
+      font-size: 12px;
+    }
+  }
+}
