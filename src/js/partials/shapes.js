@@ -20,6 +20,22 @@ class Shape {
     this.randomX = 20 + random(generationAreaWidth - 110 - 40);
     this.randomY = -this.radius * 2;
     this.borderColor = 0x000000;
+    this.surfaceField = document.querySelector('.js-surfaceField');
+  }
+
+  updateCurrentFigureSurfaceArea(surfaceArea = 0) {
+    this.surfaceField.textContent = surfaceArea + ' px^2';
+  }
+
+
+  addClickRemovement() {
+    figures.forEach((item) => {
+      item.on('pointerdown', this.clearFigure);
+    });
+  }
+
+  clearFigure() {
+    this.clear();
   }
 
   createCircle() {
@@ -31,6 +47,8 @@ class Shape {
     this.circle.buttonMode = true;
     this.circle.live = true;
     this.circle.surfaceArea = Math.round(Math.PI * this.radius * this.radius);
+
+    this.updateCurrentFigureSurfaceArea(this.circle.surfaceArea);
     figures.push(this.circle);
     figuresSurfaceArea += this.circle;
     this.app.stage.addChild(this.circle);
@@ -46,7 +64,10 @@ class Shape {
     this.ellipse.buttonMode = true;
     this.ellipse.live = true;
     this.ellipse.surfaceArea = Math.round(Math.PI * this.radius / 2 * this.radius * 1.5 / 2);
+    this.updateCurrentFigureSurfaceArea(this.ellipse.surfaceArea);
     figures.push(this.ellipse);
+
+
     this.app.stage.addChild(this.ellipse);
   }
 
@@ -63,6 +84,8 @@ class Shape {
     this.triangle.buttonMode = true;
     this.triangle.live = true;
     this.triangle.surfaceArea = Math.round(Math.sqrt(3) / 4 * this.radius * this.radius);
+    this.updateCurrentFigureSurfaceArea(this.triangle.surfaceArea);
+
     figures.push(this.triangle);
     this.app.stage.addChild(this.triangle);
   }
@@ -76,7 +99,7 @@ class Shape {
     this.rectangle.interactive = true;
     this.rectangle.buttonMode = true;
     this.rectangle.live = true;
-
+    this.updateCurrentFigureSurfaceArea(0);
     figures.push(this.rectangle);
     this.app.stage.addChild(this.rectangle);
   }
@@ -98,7 +121,7 @@ class Shape {
     this.pentagon.interactive = true;
     this.pentagon.buttonMode = true;
     this.pentagon.live = true;
-
+    this.updateCurrentFigureSurfaceArea(0);
     figures.push(this.pentagon);
     this.app.stage.addChild(this.pentagon);
   }
@@ -117,11 +140,10 @@ class Shape {
     ]);
 
     this.hexagon.endFill();
-    //this.hexagon.angle =10;
     this.hexagon.interactive = true;
     this.hexagon.buttonMode = true;
     this.hexagon.live = true;
-
+    this.updateCurrentFigureSurfaceArea(0);
     figures.push(this.hexagon);
     this.app.stage.addChild(this.hexagon);
   }
@@ -140,9 +162,11 @@ class Shape {
     this.random.drawEllipse(this.randomX + 15 + 80, this.randomY + 20, 20, 15);
     this.random.drawEllipse(this.randomX + 15 + 80, this.randomY + 20 + 30, 20, 15);
     this.random.drawEllipse(this.randomX + 15, this.randomY + 20 + 30, 20, 15);
-
+    this.random.interactive = true;
+    this.random.buttonMode = true;
+    this.random.live = true;
     this.random.endFill();
-
+    this.updateCurrentFigureSurfaceArea(0);
     figures.push(this.random);
     this.app.stage.addChild(this.random);
   }
@@ -188,5 +212,6 @@ class Shape {
         break;
     }
     this.startFallingAnimation();
+    this.addClickRemovement();
   }
 }
